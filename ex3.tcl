@@ -1,22 +1,22 @@
 set ns [new Simulator]
 
-set tf [open ex4.tr w]
+set tf [open ex3.tr w]
 $ns trace-all $tf
 
-set nf [open ex4.nam w]
+set nf [open ex3.nam w]
 $ns namtrace-all $nf
-set cwind [open win4.tr w]
+set cwind [open win3.tr w]
 
-$ns color 1 Blue 
+$ns color 1 Blue
 $ns color 2 Red
 
 $ns rtproto DV
 
-set n0 [$ns node]
-set n1 [$ns node]
-set n2 [$ns node]
+set n0 [$ns node] 
+set n1 [$ns node] 
+set n2 [$ns node] 
 set n3 [$ns node]
-set n4 [$ns node]
+set n4 [$ns node] 
 set n5 [$ns node]
 
 $ns duplex-link $n0 $n1 0.3Mb 10ms DropTail
@@ -51,23 +51,23 @@ $ns at 0.1 "$ftp start"
 
 $ns at 12.0 "finish"
 
-proc plotWindow {tcpSource file} {
-global ns
-set time 0.01
-set now [$ns now]
-set cwnd [$tcpSource set cwnd_]
-puts $file "$now $cwnd"
-$ns at [expr $now+$time] "plotWindow $tcpSource $file" }
+proc plotWindow {tcpSource file} { 
+    global ns
+    set time 0.01
+    set now [$ns now]
+    set cwnd [$tcpSource set cwnd_] puts $file "$now $cwnd"
+    $ns at [expr $now+$time] "plotWindow $tcpSource $file" }
+
 $ns at 1.0 "plotWindow $tcp $cwind"
 
 proc finish {} {
-	global ns tf nf cwind
-	$ns flush-trace
-	close $tf
-	close $nf
-	exec nam ex4.nam &
-        exec xgraph win4.tr & 
-	exit 0
-}
+    global ns tf nf cwind
+    $ns flush-trace 
+    close $tf
+    close $nf
+    exec nam ex3.nam & 
+    exec xgraph win3.tr &
+    exit 0
+    }
 
 $ns run
